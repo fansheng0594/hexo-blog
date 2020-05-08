@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Append&#39;s 记录簿</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="PHP 超文本预处理器 PHP的三个主要领域：  服务端脚本。需要PHP解析器、web服务器、web浏览器 命令行脚本。仅需要PHP解析器来执行 桌面应用程序。PHP-GTK  PHP支持绝大多数的web服务器，数据库，系统 超全局变量 $_SERVER Post 并不会比 get 更安全。两者之间的选择原因有多种，一是 url 往往有长度限制，不能发送非常多请求，二是，谷歌搜索这一类在url中传">
+<meta name="keywords" content="Life">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Append&#39;s 记录簿">
+<meta property="og:url" content="http://goodbye.wang/2019/09/15/PHP 基本语法和类型/index.html">
+<meta property="og:site_name" content="Append&#39;s 记录簿">
+<meta property="og:description" content="PHP 超文本预处理器 PHP的三个主要领域：  服务端脚本。需要PHP解析器、web服务器、web浏览器 命令行脚本。仅需要PHP解析器来执行 桌面应用程序。PHP-GTK  PHP支持绝大多数的web服务器，数据库，系统 超全局变量 $_SERVER Post 并不会比 get 更安全。两者之间的选择原因有多种，一是 url 往往有长度限制，不能发送非常多请求，二是，谷歌搜索这一类在url中传">
+<meta property="og:locale" content="zh">
+<meta property="og:updated_time" content="2019-09-15T14:42:20.155Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Append&#39;s 记录簿">
+<meta name="twitter:description" content="PHP 超文本预处理器 PHP的三个主要领域：  服务端脚本。需要PHP解析器、web服务器、web浏览器 命令行脚本。仅需要PHP解析器来执行 桌面应用程序。PHP-GTK  PHP支持绝大多数的web服务器，数据库，系统 超全局变量 $_SERVER Post 并不会比 get 更安全。两者之间的选择原因有多种，一是 url 往往有长度限制，不能发送非常多请求，二是，谷歌搜索这一类在url中传">
+  
+    <link rel="alternate" href="/atom.xml" title="Append&#39;s 记录簿" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Append&#39;s 记录簿</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://goodbye.wang"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-PHP 基本语法和类型" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/09/15/PHP 基本语法和类型/" class="article-date">
+  <time datetime="2019-09-15T09:49:33.217Z" itemprop="datePublished">2019-09-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>PHP 超文本预处理器</p>
+<p>PHP的三个主要领域：</p>
+<ul>
+<li>服务端脚本。需要PHP解析器、web服务器、web浏览器</li>
+<li>命令行脚本。仅需要PHP解析器来执行</li>
+<li>桌面应用程序。PHP-GTK</li>
+</ul>
+<p>PHP支持绝大多数的web服务器，数据库，系统</p>
+<p>超全局变量 $_SERVER</p>
+<p>Post 并不会比 get 更安全。两者之间的选择原因有多种，一是 url 往往有长度限制，不能发送非常多请求，二是，谷歌搜索这一类在url中传递搜索条件，利于搜索者们进行方便分享。用post传输只是比get传输泄漏信息较难些罢了，如果在 get 中传输密码，很容易被他人查看，或用户不慎分享了 url 就会造成损失。然而，如果没有部署 ssl 服务，两者都是不安全的</p>
+<p>对于 Apache，PHP有一个直接模块接口。如果 PHP 不能作为模块支持 web 服务器，可以将其作为 FastCGI 处理器来使用，这就意味着 CGI 可执行程序来处理服务器上的所有 PHP 文件请求</p>
+<p>纯PHP脚本不加 ?&gt; 结尾标记的原因是，PHP输出时会自动删除结束符后的第一个换行，如果结束符后有5个换行，则会输出4个空行</p>
+<p>结束标记在单行注释中会被解析（/ #），在多行注释（/**/）中不会</p>
+<h2 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h2><p>四种标量：</p>
+<ul>
+<li>boolean</li>
+<li>integer</li>
+<li>float</li>
+<li>string</li>
+</ul>
+<p>三种复合类型：</p>
+<ul>
+<li>array</li>
+<li>object</li>
+<li>callback</li>
+</ul>
+<p>两种特殊类型：</p>
+<ul>
+<li>resource</li>
+<li>NULL</li>
+</ul>
+<p>如果想查看某个表达式的值和类型，用 var_dump() 查看，想得到类型用 gettype()，想检验是否是某个类型用 is_type 函数</p>
+<p>Is_int for integers，is_bool for boolean，is_boolean won’t work</p>
+<h3 id="Boolean-布尔类型"><a href="#Boolean-布尔类型" class="headerlink" title="Boolean 布尔类型"></a>Boolean 布尔类型</h3><p>TRUE 或 FALSE，两个都不区分大小写，建议大写</p>
+<p>转换为 boolean 时，以下值会被认为是 false:</p>
+<ul>
+<li>布尔值 false</li>
+<li>整型值 0</li>
+<li>浮点型值 0.0</li>
+<li>空字符串，以及字符串 “0”    // take care</li>
+<li>不包括任何元素的数组</li>
+<li>特殊类型 NULL</li>
+</ul>
+<p>这里注意：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$x = <span class="keyword">TRUE</span>;</span><br><span class="line">$y = <span class="keyword">FALSE</span>;</span><br><span class="line">$z = $y <span class="keyword">OR</span> $x; <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 由于 OR 的优先级低于=赋值运算符，所以相当于 ($z = false) OR $x</span></span><br><span class="line">  </span><br><span class="line">$x=<span class="keyword">TRUE</span>;</span><br><span class="line">$y=<span class="keyword">FALSE</span>;</span><br><span class="line">$z=$y || $x;</span><br><span class="line"></span><br><span class="line"><span class="comment">// || 的优先级要大于赋值运算符</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">// Consider that the 0 could by any parameters including itself</span></span><br><span class="line">var_dump(<span class="number">0</span> == <span class="number">1</span>); <span class="comment">// false</span></span><br><span class="line">var_dump(<span class="number">0</span> == (bool)<span class="string">'all'</span>); <span class="comment">// false</span></span><br><span class="line">var_dump(<span class="number">0</span> == <span class="string">'all'</span>); <span class="comment">// TRUE, take care </span></span><br><span class="line"><span class="comment">// 这是因为 'all' 转换成整型后等于 0 了</span></span><br><span class="line">var_dump(<span class="number">0</span> == <span class="string">'1all'</span>); <span class="comment">// false</span></span><br><span class="line">var_dump(<span class="number">0</span> === <span class="string">'all'</span>); <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 所以，为了比较两者是否相等，把整型转成字符串</span></span><br><span class="line">var_dump((string)<span class="number">0</span> == <span class="string">'all'</span>); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<p>有的时候 true 显示成 1， false 显示成 0，不能这么表达“布尔代表 0 或者 1”</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$var1 = <span class="keyword">TRUE</span>;</span><br><span class="line">$var2 = <span class="keyword">FALSE</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> $var1; <span class="comment">// Will display the number 1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> $var2; <span class="comment">//Will display nothing</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* To get it to display the number 0 for</span></span><br><span class="line"><span class="comment">a false value you have to typecast it: */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> (int)$var2; <span class="comment">//This will display the number 0 for false.</span></span><br></pre></td></tr></table></figure>
+
+<p>OR 可以这么使用：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    $page=@$_GET[<span class="string">'page'</span>] <span class="keyword">or</span> $page=@$_COOKIE[<span class="string">'page'</span>] <span class="keyword">or</span> $page=<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 该用法不同于,以下只会是 true or false</span></span><br><span class="line">    $page=(@$_GET[<span class="string">'page'</span>] || @$_COOKIE[<span class="string">'page'</span>] || <span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">'true as string gives ['</span> . (string) <span class="keyword">true</span> . <span class="string">"] not [true].\n"</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">'false as string gives ['</span> . (string) <span class="keyword">false</span> . <span class="string">"] not [false].\n"</span>;</span><br><span class="line"></span><br><span class="line">Output:</span><br><span class="line"></span><br><span class="line"><span class="keyword">true</span> <span class="keyword">as</span> string gives [<span class="number">1</span>] not [<span class="keyword">true</span>].</span><br><span class="line"><span class="keyword">false</span> <span class="keyword">as</span> string gives [] not [<span class="keyword">false</span>].</span><br></pre></td></tr></table></figure>
+
+<h3 id="Integer-整型"><a href="#Integer-整型" class="headerlink" title="Integer 整型"></a>Integer 整型</h3><ul>
+<li>十进制</li>
+<li>八进制，数字前面必须加上0（零）</li>
+<li>十六进制，数字前面必须加上 0x</li>
+<li>二进制，数字前面必须加上 0b</li>
+</ul>
+<p>如果给定的一个数或运算结果超出了 integer 范围，将会被解释为 float</p>
+<p>PHP 中没有整除运算符</p>
+<p>转换为整型：</p>
+<ul>
+<li><p>布尔值。false 转为 0， true 转为 1</p>
+</li>
+<li><p>浮点型。转换成整数时，向下取整</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Warning</span></span><br><span class="line"><span class="comment">//绝不要将未知的分数强制转换为 integer，这样有时会导致不可预料的结果。</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">echo</span> (int) ( (<span class="number">0.1</span>+<span class="number">0.7</span>) * <span class="number">10</span> ); <span class="comment">// 显示 7!</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$x = <span class="number">0123</span>;          <span class="comment">// 83</span></span><br><span class="line">$y = <span class="string">"0123"</span> + <span class="number">0</span>;     <span class="comment">// 123</span></span><br><span class="line">  </span><br><span class="line">$z = intval(<span class="string">"0123"</span>, <span class="number">8</span>) + <span class="number">0</span>; <span class="comment">// 83</span></span><br><span class="line"><span class="comment">// intval 第二个参数可以指定进制数</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Float-浮点型"><a href="#Float-浮点型" class="headerlink" title="Float 浮点型"></a>Float 浮点型</h3><p>十进制表示一些有理数，如 0.1 或 0.7 时，无论有多少尾数都无法使用二进制精确表示，因此不能在不丢失一点精度的情况下转换为二进制。例如，<em>floor((0.1+0.7)*10)</em> 通常会返回 <em>7</em> 而不是预期中的 <em>8</em>，因为该结果内部的表示其实是类似 <em>7.9999999999999991118…</em>。</p>
+<p>永远不要相信浮点数精确到了最后一位，也永远不要比较两个浮点数是否相等</p>
+<p>比较浮点数。比较两个浮点数是否相等是有问题的，还是有迂回的办法来解决的：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$a = <span class="number">1.23456789</span>;</span><br><span class="line">$b = <span class="number">1.23456780</span>;</span><br><span class="line">$epsilon = <span class="number">0.00001</span>;</span><br><span class="line"><span class="comment">// 使用一个你所能接受的最小差别值</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(abs($a-$b) &lt; $epsilon) &#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"true"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>某些数学运算会产生一个常量 NaN，此结果表示一个在浮点运算中未定义或不可表述的值，任何拿此值与其他值（除了 true）进行松散或严格比较的结果都是 false：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">Code:</span><br><span class="line">    var_dump(NAN || <span class="keyword">FALSE</span>);</span><br><span class="line">    var_dump(NAN &amp;&amp; <span class="keyword">TRUE</span>);</span><br><span class="line">    var_dump(NAN === <span class="keyword">FALSE</span>);</span><br><span class="line">    var_dump(NAN === <span class="keyword">TRUE</span>);</span><br><span class="line">    var_dump(NAN === <span class="string">"FDS"</span>);</span><br><span class="line">    var_dump(NAN === NAN);</span><br><span class="line">    var_dump(NAN == NAN);</span><br><span class="line">    var_dump(NAN == <span class="keyword">FALSE</span>);</span><br><span class="line">    var_dump(NAN == <span class="keyword">TRUE</span>);</span><br><span class="line"></span><br><span class="line">result:</span><br><span class="line"></span><br><span class="line">bool(<span class="keyword">true</span>)</span><br><span class="line">bool(<span class="keyword">true</span>)</span><br><span class="line">bool(<span class="keyword">false</span>)</span><br><span class="line">bool(<span class="keyword">false</span>)</span><br><span class="line">bool(<span class="keyword">false</span>)</span><br><span class="line">bool(<span class="keyword">false</span>)</span><br><span class="line">bool(<span class="keyword">false</span>)</span><br><span class="line">bool(<span class="keyword">false</span>)</span><br><span class="line">bool(<span class="keyword">true</span>)</span><br></pre></td></tr></table></figure>
+
+<p>需要注意的问题：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$x = <span class="number">8</span> - <span class="number">6.4</span>;  <span class="comment">// which is equal to 1.6</span></span><br><span class="line">$y = <span class="number">1.6</span>;</span><br><span class="line">var_dump($x == $y); <span class="comment">// is not true</span></span><br><span class="line"></span><br><span class="line">var_dump(round($x, <span class="number">2</span>) == round($y, <span class="number">2</span>)); <span class="comment">// this is true</span></span><br><span class="line"></span><br><span class="line">var_export($x); <span class="comment">// 打印真实值，可以发现实际结果为 1.5999999999999996</span></span><br></pre></td></tr></table></figure>
+
+<p>在进行金额计算时，浮点数计算不精确，最好应该是以分为单位</p>
+<h3 id="String-字符串"><a href="#String-字符串" class="headerlink" title="String 字符串"></a>String 字符串</h3><p>表达字符串的 4 种表达方式：</p>
+<ul>
+<li>单引号。只可以转义单引号本身和反斜线，在单引号中内容换行，输出时也是换行的。不会解析 \n \r 之类</li>
+<li>双引号。最重要的特征是可以解析变量，还可以转义 \n \r \t</li>
+<li>heredoc 语法结构</li>
+<li>nowdoc 语法结构</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://goodbye.wang/2019/09/15/PHP 基本语法和类型/" data-id="ck0kssoyp0000vm0kdmmw2o1b" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/09/04/运动改造大脑笔记/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">运动改造大脑笔记</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/NVM/">NVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NodeJS/">NodeJS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/心理学/">心理学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/成长/">成长</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/日记/">日记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/计划/">计划</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/NVM/" style="font-size: 10px;">NVM</a> <a href="/tags/NodeJS/" style="font-size: 10px;">NodeJS</a> <a href="/tags/PHP/" style="font-size: 10px;">PHP</a> <a href="/tags/心理学/" style="font-size: 20px;">心理学</a> <a href="/tags/成长/" style="font-size: 10px;">成长</a> <a href="/tags/日记/" style="font-size: 10px;">日记</a> <a href="/tags/计划/" style="font-size: 10px;">计划</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/09/15/PHP 基本语法和类型/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/09/04/运动改造大脑笔记/">运动改造大脑笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2019/09/04/自控力课程笔记/">自控力课程笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2019/08/28/PHP开发tips/">PHP开发tips</a>
+          </li>
+        
+          <li>
+            <a href="/2019/08/26/计划撰写的博客/">计划撰写的博客</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Append<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

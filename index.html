@@ -66,6 +66,126 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-PHP 基本语法和类型" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/09/15/PHP 基本语法和类型/" class="article-date">
+  <time datetime="2019-09-15T09:49:33.217Z" itemprop="datePublished">2019-09-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>PHP 超文本预处理器</p>
+<p>PHP的三个主要领域：</p>
+<ul>
+<li>服务端脚本。需要PHP解析器、web服务器、web浏览器</li>
+<li>命令行脚本。仅需要PHP解析器来执行</li>
+<li>桌面应用程序。PHP-GTK</li>
+</ul>
+<p>PHP支持绝大多数的web服务器，数据库，系统</p>
+<p>超全局变量 $_SERVER</p>
+<p>Post 并不会比 get 更安全。两者之间的选择原因有多种，一是 url 往往有长度限制，不能发送非常多请求，二是，谷歌搜索这一类在url中传递搜索条件，利于搜索者们进行方便分享。用post传输只是比get传输泄漏信息较难些罢了，如果在 get 中传输密码，很容易被他人查看，或用户不慎分享了 url 就会造成损失。然而，如果没有部署 ssl 服务，两者都是不安全的</p>
+<p>对于 Apache，PHP有一个直接模块接口。如果 PHP 不能作为模块支持 web 服务器，可以将其作为 FastCGI 处理器来使用，这就意味着 CGI 可执行程序来处理服务器上的所有 PHP 文件请求</p>
+<p>纯PHP脚本不加 ?&gt; 结尾标记的原因是，PHP输出时会自动删除结束符后的第一个换行，如果结束符后有5个换行，则会输出4个空行</p>
+<p>结束标记在单行注释中会被解析（/ #），在多行注释（/**/）中不会</p>
+<h2 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h2><p>四种标量：</p>
+<ul>
+<li>boolean</li>
+<li>integer</li>
+<li>float</li>
+<li>string</li>
+</ul>
+<p>三种复合类型：</p>
+<ul>
+<li>array</li>
+<li>object</li>
+<li>callback</li>
+</ul>
+<p>两种特殊类型：</p>
+<ul>
+<li>resource</li>
+<li>NULL</li>
+</ul>
+<p>如果想查看某个表达式的值和类型，用 var_dump() 查看，想得到类型用 gettype()，想检验是否是某个类型用 is_type 函数</p>
+<p>Is_int for integers，is_bool for boolean，is_boolean won’t work</p>
+<h3 id="Boolean-布尔类型"><a href="#Boolean-布尔类型" class="headerlink" title="Boolean 布尔类型"></a>Boolean 布尔类型</h3><p>TRUE 或 FALSE，两个都不区分大小写，建议大写</p>
+<p>转换为 boolean 时，以下值会被认为是 false:</p>
+<ul>
+<li>布尔值 false</li>
+<li>整型值 0</li>
+<li>浮点型值 0.0</li>
+<li>空字符串，以及字符串 “0”    // take care</li>
+<li>不包括任何元素的数组</li>
+<li>特殊类型 NULL</li>
+</ul>
+<p>这里注意：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$x = <span class="keyword">TRUE</span>;</span><br><span class="line">$y = <span class="keyword">FALSE</span>;</span><br><span class="line">$z = $y <span class="keyword">OR</span> $x; <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 由于 OR 的优先级低于=赋值运算符，所以相当于 ($z = false) OR $x</span></span><br><span class="line">  </span><br><span class="line">$x=<span class="keyword">TRUE</span>;</span><br><span class="line">$y=<span class="keyword">FALSE</span>;</span><br><span class="line">$z=$y || $x;</span><br><span class="line"></span><br><span class="line"><span class="comment">// || 的优先级要大于赋值运算符</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">// Consider that the 0 could by any parameters including itself</span></span><br><span class="line">var_dump(<span class="number">0</span> == <span class="number">1</span>); <span class="comment">// false</span></span><br><span class="line">var_dump(<span class="number">0</span> == (bool)<span class="string">'all'</span>); <span class="comment">// false</span></span><br><span class="line">var_dump(<span class="number">0</span> == <span class="string">'all'</span>); <span class="comment">// TRUE, take care </span></span><br><span class="line"><span class="comment">// 这是因为 'all' 转换成整型后等于 0 了</span></span><br><span class="line">var_dump(<span class="number">0</span> == <span class="string">'1all'</span>); <span class="comment">// false</span></span><br><span class="line">var_dump(<span class="number">0</span> === <span class="string">'all'</span>); <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 所以，为了比较两者是否相等，把整型转成字符串</span></span><br><span class="line">var_dump((string)<span class="number">0</span> == <span class="string">'all'</span>); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<p>有的时候 true 显示成 1， false 显示成 0，不能这么表达“布尔代表 0 或者 1”</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$var1 = <span class="keyword">TRUE</span>;</span><br><span class="line">$var2 = <span class="keyword">FALSE</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> $var1; <span class="comment">// Will display the number 1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> $var2; <span class="comment">//Will display nothing</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* To get it to display the number 0 for</span></span><br><span class="line"><span class="comment">a false value you have to typecast it: */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> (int)$var2; <span class="comment">//This will display the number 0 for false.</span></span><br></pre></td></tr></table></figure>
+
+<p>OR 可以这么使用：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    $page=@$_GET[<span class="string">'page'</span>] <span class="keyword">or</span> $page=@$_COOKIE[<span class="string">'page'</span>] <span class="keyword">or</span> $page=<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 该用法不同于,以下只会是 true or false</span></span><br><span class="line">    $page=(@$_GET[<span class="string">'page'</span>] || @$_COOKIE[<span class="string">'page'</span>] || <span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">'true as string gives ['</span> . (string) <span class="keyword">true</span> . <span class="string">"] not [true].\n"</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">'false as string gives ['</span> . (string) <span class="keyword">false</span> . <span class="string">"] not [false].\n"</span>;</span><br><span class="line"></span><br><span class="line">Output:</span><br><span class="line"></span><br><span class="line"><span class="keyword">true</span> <span class="keyword">as</span> string gives [<span class="number">1</span>] not [<span class="keyword">true</span>].</span><br><span class="line"><span class="keyword">false</span> <span class="keyword">as</span> string gives [] not [<span class="keyword">false</span>].</span><br></pre></td></tr></table></figure>
+
+<h3 id="Integer-整型"><a href="#Integer-整型" class="headerlink" title="Integer 整型"></a>Integer 整型</h3><ul>
+<li>十进制</li>
+<li>八进制，数字前面必须加上0（零）</li>
+<li>十六进制，数字前面必须加上 0x</li>
+<li>二进制，数字前面必须加上 0b</li>
+</ul>
+<p>如果给定的一个数或运算结果超出了 integer 范围，将会被解释为 float</p>
+<p>PHP 中没有整除运算符</p>
+<p>转换为整型：</p>
+<ul>
+<li><p>布尔值。false 转为 0， true 转为 1</p>
+</li>
+<li><p>浮点型。转换成整数时，向下取整</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Warning</span></span><br><span class="line"><span class="comment">//绝不要将未知的分数强制转换为 integer，这样有时会导致不可预料的结果。</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">echo</span> (int) ( (<span class="number">0.1</span>+<span class="number">0.7</span>) * <span class="number">10</span> ); <span class="comment">// 显示 7!</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$x = <span class="number">0123</span>;          <span class="comment">// 83</span></span><br><span class="line">$y = <span class="string">"0123"</span> + <span class="number">0</span>;     <span class="comment">// 123</span></span><br><span class="line">  </span><br><span class="line">$z = intval(<span class="string">"0123"</span>, <span class="number">8</span>) + <span class="number">0</span>; <span class="comment">// 83</span></span><br><span class="line"><span class="comment">// intval 第二个参数可以指定进制数</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Float-浮点型"><a href="#Float-浮点型" class="headerlink" title="Float 浮点型"></a>Float 浮点型</h3><p>十进制表示一些有理数，如 0.1 或 0.7 时，无论有多少尾数都无法使用二进制精确表示，因此不能在不丢失一点精度的情况下转换为二进制。例如，<em>floor((0.1+0.7)*10)</em> 通常会返回 <em>7</em> 而不是预期中的 <em>8</em>，因为该结果内部的表示其实是类似 <em>7.9999999999999991118…</em>。</p>
+<p>永远不要相信浮点数精确到了最后一位，也永远不要比较两个浮点数是否相等</p>
+<p>比较浮点数。比较两个浮点数是否相等是有问题的，还是有迂回的办法来解决的：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$a = <span class="number">1.23456789</span>;</span><br><span class="line">$b = <span class="number">1.23456780</span>;</span><br><span class="line">$epsilon = <span class="number">0.00001</span>;</span><br><span class="line"><span class="comment">// 使用一个你所能接受的最小差别值</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(abs($a-$b) &lt; $epsilon) &#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"true"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>某些数学运算会产生一个常量 NaN，此结果表示一个在浮点运算中未定义或不可表述的值，任何拿此值与其他值（除了 true）进行松散或严格比较的结果都是 false：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">Code:</span><br><span class="line">    var_dump(NAN || <span class="keyword">FALSE</span>);</span><br><span class="line">    var_dump(NAN &amp;&amp; <span class="keyword">TRUE</span>);</span><br><span class="line">    var_dump(NAN === <span class="keyword">FALSE</span>);</span><br><span class="line">    var_dump(NAN === <span class="keyword">TRUE</span>);</span><br><span class="line">    var_dump(NAN === <span class="string">"FDS"</span>);</span><br><span class="line">    var_dump(NAN === NAN);</span><br><span class="line">    var_dump(NAN == NAN);</span><br><span class="line">    var_dump(NAN == <span class="keyword">FALSE</span>);</span><br><span class="line">    var_dump(NAN == <span class="keyword">TRUE</span>);</span><br><span class="line"></span><br><span class="line">result:</span><br><span class="line"></span><br><span class="line">bool(<span class="keyword">true</span>)</span><br><span class="line">bool(<span class="keyword">true</span>)</span><br><span class="line">bool(<span class="keyword">false</span>)</span><br><span class="line">bool(<span class="keyword">false</span>)</span><br><span class="line">bool(<span class="keyword">false</span>)</span><br><span class="line">bool(<span class="keyword">false</span>)</span><br><span class="line">bool(<span class="keyword">false</span>)</span><br><span class="line">bool(<span class="keyword">false</span>)</span><br><span class="line">bool(<span class="keyword">true</span>)</span><br></pre></td></tr></table></figure>
+
+<p>需要注意的问题：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$x = <span class="number">8</span> - <span class="number">6.4</span>;  <span class="comment">// which is equal to 1.6</span></span><br><span class="line">$y = <span class="number">1.6</span>;</span><br><span class="line">var_dump($x == $y); <span class="comment">// is not true</span></span><br><span class="line"></span><br><span class="line">var_dump(round($x, <span class="number">2</span>) == round($y, <span class="number">2</span>)); <span class="comment">// this is true</span></span><br><span class="line"></span><br><span class="line">var_export($x); <span class="comment">// 打印真实值，可以发现实际结果为 1.5999999999999996</span></span><br></pre></td></tr></table></figure>
+
+<p>在进行金额计算时，浮点数计算不精确，最好应该是以分为单位</p>
+<h3 id="String-字符串"><a href="#String-字符串" class="headerlink" title="String 字符串"></a>String 字符串</h3><p>表达字符串的 4 种表达方式：</p>
+<ul>
+<li>单引号。只可以转义单引号本身和反斜线，在单引号中内容换行，输出时也是换行的。不会解析 \n \r 之类</li>
+<li>双引号。最重要的特征是可以解析变量，还可以转义 \n \r \t</li>
+<li>heredoc 语法结构</li>
+<li>nowdoc 语法结构</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://goodbye.wang/2019/09/15/PHP 基本语法和类型/" data-id="ck0kssoyp0000vm0kdmmw2o1b" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-运动改造大脑笔记" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/09/04/运动改造大脑笔记/" class="article-date">
@@ -92,7 +212,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://goodbye.wang/2019/09/04/运动改造大脑笔记/" data-id="ck060x9v8000cbefy4d1vtqur" class="article-share-link">Share</a>
+      <a data-url="http://goodbye.wang/2019/09/04/运动改造大脑笔记/" data-id="ck0d4vxvk00029jfy9hzig01j" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/心理学/">心理学</a></li></ul>
@@ -147,11 +267,61 @@
 <p>冥想。冥想可以提升你集中注意力，管理压力，克制冲动和认识自我的能力。坐在椅子上，背挺直，双手放在膝盖上，闭上眼睛，吸气时脑海中默念“吸”，呼气时脑海中默念“呼”。当你发现走神时，重新将注意力集中到呼吸上。几分钟后，你就可以不再默念“呼“和”吸“了。试着专注于呼吸本身。注意到空气从嘴巴和鼻子进入和呼出的感觉，感觉到胸腹部的扩张和收缩。不再默念之后，你可能会更容易走神，当你发现自己在想其他事情的时候，重新将注意力集中到呼吸上。实在很难集中的话就继续默念。这部分的训练能锻炼你的自我意识和自控能力。刚开始每天五分钟，习惯之后，每天锻炼十到十五分钟</p>
 <p>更难的事是什么？想象你正在面临一个意志力挑战。更难的事是什么？为何它如此困难？</p>
 <p>认清两个自我。你在做意志力挑战时，如何描述两个互相抗衡的自我？冲动的你想要什么？理智的你想要什么？</p>
+<h2 id="第二周"><a href="#第二周" class="headerlink" title="第二周"></a>第二周</h2><p>当你遇到真正的意志力挑战时，你的身体一定能感觉到，这是你身体内部的战斗。有时，欲望会占据上风。有时，那个更加明智、想变得更好的你会占据上风。只有大脑和身体同时作用，才有力量克服冲动</p>
+<p>我们行动和努力的指南不可以是想象中的图像，应该是考虑清楚的概念。直观的印象和图像强有力地入侵我们的情绪，扰乱其平和或动摇其决心。这是因为眼前存在的、可以直观参照的事物总是以全力突然产生效果，轻易就让我们对其一目了然。然而，思想和理据却更需要平静和时间。但此时，我们无法随时把思想和理据呈现在眼前。正因为这样，经过思考我们已经放弃了某一令人垂诞的事物，但一看见这可欲之物，我们又被其吸引</p>
+<p>如果我们无法通过思想来消除印象对我们的影响，最好的办法就是用相反的印象来中和它的作用。比如想到诱人的奶酪，我们可以想象一下，全身都是油脂，高高凸起的肚子，以及很不健康的你。</p>
+<p>我们总觉得诱惑和麻烦来自外部的世界，是甜甜圈，奶酪或是发达的互联网。但其实问题出在我们身上，是我们的思想、欲望、情绪和冲动出了问题。对你的意志力挑战来说，最重要的是认清什么是需要克制的内在冲动。哪些想法或感觉使你在不情愿的时候作出决定？下一次受到诱惑的时候，试着观察一下自己的内心世界。</p>
+<p>三思而后行，放慢速度</p>
+<p>心率变异度反应了意志力的程度，心率变异度越高，意志力越强，反之。任何给你的身心带来压力的东西都会影响自控力的生理基础，甚至会摧毁你的意志力。这方面的敌人诸如焦虑、愤怒、抑郁和孤独等，慢性疼痛和慢性疾病也会消耗大脑的大部分意志力储备。</p>
+<p>提高心率变异度可以通过冥想，锻炼，保持良好的睡眠，保证健康饮食等。还有一种较容易实现的方法是将呼吸频率降低到每分钟4-6次，也就是每次呼吸用10-15秒时间，比平常呼吸要慢</p>
+<p>锻炼是提升意志力非常有效的方法，对起步者来说，锻炼能起到立竿见影的效果。不仅能缓解日常压力，还会抵抗抑郁，让你的头脑更充实，运转更快。任何让你离开椅子的运动，都能提高你的意志力储备。每次锻炼的时候，我们可以把锻炼当成是意志力发动机，我们希望每天变得更强，唯有把锻炼坚持下去，让自己有能力把控生活。</p>
+<p>睡眠对意志力有很大的影响。长期睡眠不足会让你的意志力逐渐消耗殆尽，你会很难控制情绪，集中注意力。所以，为了获得更强的意志力，那就早点休息吧。</p>
+<p>我们越晚入睡，说明我们做了更多的事情。此时，可以把“获得更多的睡眠”定义为“我不要”的意志力挑战。真正的问题并不是强迫自己去睡觉，而是远离那些让自己没法睡觉的事。</p>
+<p>适当的自控力是我们健康生活中必不可少的一部分，但如果过度自控则会产生很大的压力，威胁到我们的身心健康。因为，每次的自控都需要消耗我们的体力，而我们还需要把体力花费在更多事情上。所以我们需要放弃对意志力的完美控制</p>
+<p>意志力会受到多方面的影响，比如睡眠不足、饮食不良、缺少运动或是压力过大等。态度很重要，身体也不能掉链子。如果我们想更好地应对挑战，就需要更有效地管理压力、照顾自己。睡眠不足等坏习惯不仅反映出我们缺乏自控力，还消耗了体力，带来更多的压力，偷走了我们的自控力</p>
+<p>试着找出持续一整天或一整周的压力，看看它对你的自控力产生怎样的影响。你有过强烈的欲望吗？你发脾气了吗？你把事情拖到明天做了吗？</p>
+<p>意志力实验：</p>
+<ul>
+<li>呼吸出自控力。把呼吸调整到每分钟4-6次</li>
+<li>五分钟给意志力加油。出门活动，哪怕只是在周围转转</li>
+<li>保证足够的睡眠</li>
+</ul>
+<h2 id="第三周"><a href="#第三周" class="headerlink" title="第三周"></a>第三周</h2><p>我们只有一定量的意志力，一旦你将它消耗殆尽，你在诱惑面前就会毫无防备力，至少会处于下风。自控力就像肌肉一样有极限，使用之后就会疲惫不堪，如果不让肌肉休息，就会完全失去力量</p>
+<p>不要浪费意志力最强的时间段，把意志力用在刀刃上，如果你觉得没有时间和精力去处理“我想要”做的事，那就把它安排在你意志力最强的时候做</p>
+<p>血糖降低时，意志力也就跟着降低。</p>
+<p>大脑是个小气鬼，在某个特定时刻，只会提供一小部分能量，而保存着大部分的能量。资源丰富的时候就会支出能量，资源缺少时就会保存能量。所以，最好在有能量时做选择和决定</p>
+<p>突然增加糖分会在短期内提升意志力，但从长远的角度来看，过度依赖糖分不是自控的好方法。科学家推荐低血糖饮食，这样能让血糖更稳定，低血糖食品包括瘦肉蛋白，坚果和豆类，粗纤维谷类和麦片，大多数的水果和蔬菜。每天都吃一顿丰盛的早餐，吃零食时选择坚果而不是糖果</p>
+<p>锻炼身体可能会让你的自控力肌肉感到疲惫，但经过一段时间的锻炼，它肯定能变得更强健</p>
+<p>在一些小事上持续自控会提高整体的自控力，这些训练时为了养成习惯，通过看似不重要的意志力挑战来训练“意志力肌肉”，同时不用担心自己无法坚持到底</p>
+<p>锻炼模式</p>
+<ul>
+<li>增强“我不要”的力量：不嘲讽，不挖鼻孔等</li>
+<li>增强“我想要”的力量：每天冥想，每天做卫生等</li>
+<li>增强自我监控能力：认真记录支出、饮食，或是记录上网、看书、学习的时间</li>
+</ul>
+<p>如果你想彻底改变旧习惯，最好先找一种简单的方法来训练自控力、提高意志力，而不是设定一个过高的目标</p>
+<p>运动疲劳的原因或许不是肌肉无法继续工作，而是大脑中过度保护性的监控机制发挥了作用，当运动员第一次想放弃的时候，其实他们远远没有达到自己的极限</p>
+<p>疲惫不是一种身体反应，而是一种感觉，一种反应。疲惫只不过是大脑产生的某种反应，好让我们停下来。知道我们的意志力比想象中多得多，这确实是令人开心的事情。下一次你觉得疲惫的时候，觉得自己没法自控时，想办法挑战一下自己</p>
+<p>当你的意志力告急时，你可以挖掘你的”我想要“的力量，让自己恢复能量。可以考虑以下动机：</p>
+<ul>
+<li>如果你挑战成功，你会收获什么？你个人会有什么回报？你会更健康、更幸福、更自由、更有钱，还是会更成功？</li>
+<li>如果挑战成功，还有谁会受益？肯定有人依赖于你，你的选择会影响到他们，你的成功会怎样帮到他们？</li>
+<li>如果你现在愿意做困难的事，那么一段时间后，这个挑战将会变容易。如果你知道还有更大的进步空间，现在的不适是不是变得更值得了？</li>
+</ul>
+<p>如果我们想增强自控力，就要考虑如何支撑住最疲惫的自己，而不是指望最理想的自己突然出现来拯救生活</p>
+<p>我们不能控制所有的事，但提高自控力的唯一办法就是提升我们的极限</p>
+<p>记录意志力的上下波动。注意什么时候意志力最强，什么时候最容易放弃</p>
+<p>意志力实验：</p>
+<ul>
+<li>意志力饮食。确保身体摄入了足够的食物，能为你提供更多的能量</li>
+<li>意志力锻炼。选择一件事来做或不做，记录一件不曾关心的事</li>
+<li>发现你的“我想要”的力量，每当要放弃的时候，想一想它</li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://goodbye.wang/2019/09/04/自控力课程笔记/" data-id="ck060x9v7000abefyrlis5nl6" class="article-share-link">Share</a>
+      <a data-url="http://goodbye.wang/2019/09/04/自控力课程笔记/" data-id="ck0d4vxvs00099jfy17jk25qv" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/心理学/">心理学</a></li></ul>
@@ -266,7 +436,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://goodbye.wang/2019/08/28/PHP开发tips/" data-id="ck060x9v20003befyvgztx18y" class="article-share-link">Share</a>
+      <a data-url="http://goodbye.wang/2019/08/28/PHP开发tips/" data-id="ck0d4vxvu000c9jfymjb700yl" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
@@ -316,7 +486,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://goodbye.wang/2019/08/26/计划撰写的博客/" data-id="ck060x9v60008befyuv9tz6nt" class="article-share-link">Share</a>
+      <a data-url="http://goodbye.wang/2019/08/26/计划撰写的博客/" data-id="ck0d4vxvo00049jfyycsku6sh" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/计划/">计划</a></li></ul>
@@ -389,7 +559,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://goodbye.wang/2019/08/26/七月八月总结/" data-id="ck060x9v50007befyunpktcsf" class="article-share-link">Share</a>
+      <a data-url="http://goodbye.wang/2019/08/26/七月八月总结/" data-id="ck0d4vxvp00059jfyji2bxfgk" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/成长/">成长</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/日记/">日记</a></li></ul>
@@ -476,7 +646,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://goodbye.wang/2019/08/23/MacOS-系统安装-NodeJS-1/" data-id="ck060x9uu0000befy6v272xze" class="article-share-link">Share</a>
+      <a data-url="http://goodbye.wang/2019/08/23/MacOS-系统安装-NodeJS-1/" data-id="ck0d4vxvh00019jfy27hf1olh" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NVM/">NVM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NodeJS/">NodeJS</a></li></ul>
@@ -527,7 +697,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://goodbye.wang/2019/08/23/hello-world/" data-id="ck060x9uz0001befyi18pb8he" class="article-share-link">Share</a>
+      <a data-url="http://goodbye.wang/2019/08/23/hello-world/" data-id="ck0d4vxvc00009jfyq7h96rkl" class="article-share-link">Share</a>
       
       
     </footer>
@@ -582,6 +752,10 @@
       <ul>
         
           <li>
+            <a href="/2019/09/15/PHP 基本语法和类型/">(no title)</a>
+          </li>
+        
+          <li>
             <a href="/2019/09/04/运动改造大脑笔记/">运动改造大脑笔记</a>
           </li>
         
@@ -595,10 +769,6 @@
         
           <li>
             <a href="/2019/08/26/计划撰写的博客/">计划撰写的博客</a>
-          </li>
-        
-          <li>
-            <a href="/2019/08/26/七月八月总结/">裸辞两个月后的回忆</a>
           </li>
         
       </ul>
